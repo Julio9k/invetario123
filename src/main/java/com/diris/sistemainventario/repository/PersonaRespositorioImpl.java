@@ -40,7 +40,8 @@ public class PersonaRespositorioImpl implements PersonaRespositorio {
         jdbcTemplate.update(sql, id_persona);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public Persona obtenerPersona(int id_persona) throws Exception {
         String sql = "SELECT * FROM personas WHERE id_persona = ? LIMIT 1";
         return jdbcTemplate.queryForObject(sql, new Object[] { id_persona }, personaRowMapper());

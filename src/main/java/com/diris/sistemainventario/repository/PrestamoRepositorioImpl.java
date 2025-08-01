@@ -44,7 +44,8 @@ public class PrestamoRepositorioImpl implements PrestamoRepositorio {
         jdbcTemplate.update(sql, idPrestamo);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public Prestamo obtener(int idPrestamo) throws Exception {
         String sql = "SELECT * FROM view_PrestamoData WHERE idPrestamo = ? LIMIT 1";
         return jdbcTemplate.queryForObject(sql, new Object[] { idPrestamo }, prestamoRowMapper());
@@ -56,7 +57,8 @@ public class PrestamoRepositorioImpl implements PrestamoRepositorio {
         return jdbcTemplate.query(sql, prestamoRowMapper());
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public List<Prestamo> listarPorPersona(int idPersona) throws Exception {
         String sql = "SELECT * FROM view_PrestamoData WHERE idPersona = ?";
         return jdbcTemplate.query(sql, new Object[] { idPersona }, prestamoRowMapper());

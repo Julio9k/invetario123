@@ -61,7 +61,8 @@ public class DocumentoRespositorioImpl implements DocumentoRepositorio {
         jdbcTemplate.update(sql, id_documento);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public List<Documento> listar(DocumentoFiltro documentoFiltro) throws Exception {
         StringBuilder sql = new StringBuilder("SELECT * FROM view_DocumentoData WHERE 1=1");
         StringBuilder whereClause = new StringBuilder();
@@ -107,7 +108,8 @@ public class DocumentoRespositorioImpl implements DocumentoRepositorio {
 
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public Documento obtenerDoc(int id_documento) throws Exception {
         String sql = "SELECT * FROM view_DocumentoData WHERE ID = ? LIMIT 1";
         return jdbcTemplate.queryForObject(sql, new Object[] { id_documento }, documentoRowMapper());
