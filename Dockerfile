@@ -7,9 +7,6 @@ COPY .mvn .mvn
 
 RUN chmod +x mvnw
 
-# Descarga dependencias para cache (opcional)
-RUN ./mvnw dependency:go-offline --batch-mode
-
 # Copia el resto del código
 COPY src src
 
