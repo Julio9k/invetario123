@@ -1,0 +1,36 @@
+<nav class="navbar" th:fragment="navbar">
+    <div class="navbar-container">
+        <h1 class="navbar-title text-white">SISTEMA DE DOCUMENTOS</h1>
+        <ul id="navbar" class="navbar-menu">
+            <li>
+                <a th:href="@{/documento/BuscarDocumento}" class="nav-link">Buscar</a>
+            </li>
+            <li>
+                <a th:href="@{/documento/RegistrarDocumento}" class="nav-link">Registrar Documento</a>
+            </li>
+            <!--
+            <li>
+                <a th:href="@{/persona/RegistrarPersona}" class="nav-link">Registrar Usuario</a>
+            </li>
+           
+            <li>
+                <a th:href="@{/RegistrarPrestamos}" class="nav-link">Registrar Préstamos</a>
+            </li>-->
+            <li>
+                <a th:href="@{/login}" class="nav-link">Cerrar Sesion</a>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const currentPath = window.location.pathname;
+            const links = document.querySelectorAll('#navbar li a');
+            links.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</nav>

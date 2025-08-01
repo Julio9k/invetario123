@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/documento.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+</head>
+
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar}"></nav>
+
+    <main>
+        <div class="form-container">
+            <form th:action="@{/persona/guardar}" th:object="${persona}" method="post">
+                <input type="hidden" th:field="*{idPersona}" />
+                <div class="grid grid-cols-4">
+                    <div>
+                        <label>Nombre:</label>
+                        <input type="text" th:field="*{nombre}" placeholder="Ingrese nombre" required minlength="2">
+                    </div>
+                    <div>
+                        <label>Apellido:</label>
+                        <input type="text" th:field="*{apellido}" placeholder="Ingrese apellido" required minlength="2">
+                    </div>
+                    <div>
+                        <label>Correo:</label>
+                        <input type="email" th:field="*{correo}" placeholder="Ingrese correo" required>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" th:text="${persona.idPersona != null} ? 'Actualizar' : 'Registrar'"></button>
+                </div>
+            </form>
+        </div>
+
+        <div>
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="per : ${listaPersonas}">
+                        <td th:text="${per.idPersona}"></td>
+                        <td th:text="${per.nombre}"></td>
+                        <td th:text="${per.apellido}"></td>
+                        <td th:text="${per.correo}"></td>
+                        <td>
+                            <a th:href="@{/persona/editarPersona/{id}(id=${per.idPersona})}"
+                                class="btn btn-info">Editar</a>
+                            <a th:href="@{/persona/eliminarPersona/{id}(id=${per.idPersona})}"
+                                class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/documento.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+</head>
+
+<body>
+    <nav th:replace="~{fragments/navbar :: navbar}"></nav>
+    <main>
+        <div class="form-container">
+            <form th:action="@{/documento/guardar}" th:object="${documento}" method="post">
+                <input type="hidden" th:field="*{idDocumento}" />
+                <div class="grid grid-cols-4">
+                    <div>
+                        <label>Nombre:</label>
+                        <input type="text" th:field="*{nombreDocumento}" placeholder="Ingrese nombre" required
+                            minlength="3">
+                    </div>
+                    <div>
+                        <label>Acta:</label>
+                        <select th:field="*{numActa}" required>
+                            <option value="">Seleccione acta</option>
+                            <option th:each="numActa : ${actas}" th:value="${numActa}" th:text="${numActa}"></option>
+                        </select>
+                    </div>
+                    <!-- Tipo de Documento -->
+                    <div>
+                        <label>Tipo:</label>
+                        <select th:field="*{tipo}" required>
+                            <option value="">Seleccione tipo</option>
+                            <option th:each="tipo : ${tipos}" th:value="${tipo}" th:text="${tipo}"></option>
+                        </select>
+                    </div>
+                    <!-- Distrito -->
+                    <div>
+                        <label>Distrito:</label>
+                        <select th:field="*{distrito}" required>
+                            <option value="">Seleccione distrito</option>
+                            <option th:each="distrito : ${distritos}" th:value="${distrito}" th:text="${distrito}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Fila 2 -->
+                <div class="grid grid-cols-4">
+                    <!-- Dirección -->
+                    <div>
+                        <label>Dirección:</label>
+                        <input type="text" th:field="*{direccion}" placeholder="Ingrese dirección" required
+                            minlength="5">
+                    </div>
+                    <!-- Año -->
+                    <div>
+                        <label>Año:</label>
+                        <input type="text" th:field="*{anio}" placeholder="Ingrese año" required min="1900" max="2999">
+                    </div>
+                    <!-- Nº Expediente -->
+                    <div>
+                        <label>N° Expediente:</label>
+                        <input type="text" th:field="*{numberExpediente}" placeholder="Ingrese expediente" required>
+                    </div>
+                    <!-- Resolución Administrativa -->
+                    <div>
+                        <label>Resolución Administrativa:</label>
+                        <input type="text" th:field="*{resolucionAdmin}" placeholder="Ingrese resolución" required
+                            minlength="3">
+                    </div>
+                    <!-- Tomo -->
+                    <div>
+                        <label>Tomo:</label>
+                        <select th:field="*{tomo}" required>
+                            <option value="">Seleccione Tomo</option>
+                            <option th:each="tomo : ${tomos}" th:value="${tomo}" th:text="${tomo}"></option>
+                        </select>
+                    </div>
+
+                    <!-- Caja -->
+                    <div>
+                        <label>Caja:</label>
+                        <select th:field="*{caja}" required>
+                            <option value="">Seleccione Caja</option>
+                            <option th:each="caja : ${cajas}" th:value="${caja}" th:text="${caja}"></option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Estado:</label>
+                        <select th:field="*{estado}" required>
+                            <option value="">Seleccione estado</option>
+                            <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado}"></option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Fecha:</label>
+                        <input type="date" th:field="*{fechaRegistro}" placeholder="Ingrese fecha" required>
+                    </div>
+                </div>
+
+                <!-- Botón buscar -->
+                <div class="text-center">
+                    <button type="submit" class="btn-buscar"
+                        th:text="${documento.idDocumento != null} ? 'Actualizar' : 'Registrar'"></button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
