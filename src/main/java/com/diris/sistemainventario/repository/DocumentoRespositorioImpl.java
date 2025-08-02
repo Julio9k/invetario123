@@ -20,8 +20,8 @@ public class DocumentoRespositorioImpl implements DocumentoRepositorio {
 
     @Override
     public void registrar(Documento documento) throws Exception {
-        String sql = "CALL sp_registrar_documento(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql,
+        String sql = "SELECT sp_registrar_documento(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.queryForObject(sql, Object.class,
                 documento.getNombreDocumento(),
                 documento.getNumActa(),
                 documento.getTipo(),
@@ -33,34 +33,34 @@ public class DocumentoRespositorioImpl implements DocumentoRepositorio {
                 documento.getFechaRegistro(),
                 documento.getAnio(),
                 documento.getNumberExpediente(),
-                documento.getResolucionAdmin());
+                documento.getResolucionAdmin()
+        );
     }
-
     @Override
     public void modificar(Documento documento) throws Exception {
-        String sql = "CALL sp_modificar_documento(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql,
-                documento.getIdDocumento(),
-                documento.getNombreDocumento(),
-                documento.getNumActa(),
-                documento.getTipo(),
-                documento.getDistrito(),
-                documento.getDireccion(),
-                documento.getTomo(),
-                documento.getCaja(),
-                documento.getEstado(),
-                documento.getFechaRegistro(),
-                documento.getAnio(),
-                documento.getNumberExpediente(),
-                documento.getResolucionAdmin());
-    }
+    	 String sql = "SELECT sp_modificar_documento(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+    	    jdbcTemplate.queryForObject(sql, Object.class,
+    	            documento.getIdDocumento(),
+    	            documento.getNombreDocumento(),
+    	            documento.getNumActa(),
+    	            documento.getTipo(),
+    	            documento.getDistrito(),
+    	            documento.getDireccion(),
+    	            documento.getTomo(),
+    	            documento.getCaja(),
+    	            documento.getEstado(),
+    	            documento.getFechaRegistro(),
+    	            documento.getAnio(),
+    	            documento.getNumberExpediente(),
+    	            documento.getResolucionAdmin()
+    	    );
+    	}
     @Override
     public void eliminar(int id_documento) throws Exception {
-        String sql = "CALL sp_eliminar_documento(?)";
-        jdbcTemplate.update(sql, id_documento);
+        String sql = "SELECT sp_eliminar_documento(?)";
+        jdbcTemplate.queryForObject(sql, Object.class, id_documento);
     }
-
     @SuppressWarnings("deprecation")
 	@Override
     public List<Documento> listar(DocumentoFiltro documentoFiltro) throws Exception {
