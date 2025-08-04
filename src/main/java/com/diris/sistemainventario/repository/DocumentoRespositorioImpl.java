@@ -163,14 +163,14 @@ public class DocumentoRespositorioImpl implements DocumentoRepositorio {
             Documento d = new Documento();
             d.setIdDocumento(rs.getInt("ID"));
             d.setNombreDocumento(rs.getString("nombreDocumento"));
-            d.setNumActa(rs.getString("numActa"));
+            d.setNumActa(extraerNumero(rs.getString("numActa")));
             d.setTipo(rs.getString("tipo"));
             d.setDistrito(rs.getString("distrito"));
             d.setDireccion(rs.getString("direccion"));
-            d.setTomo(rs.getString("tomo"));
-            d.setCaja(rs.getString("caja"));
+            d.setTomo(extraerNumero(rs.getString("tomo")));
+            d.setCaja(extraerNumero(rs.getString("caja")));
             d.setEstado(rs.getString("estado"));
-            d.setFechaRegistro((rs.getDate("fechaRegistro")));
+            d.setFechaRegistro(rs.getDate("fechaRegistro"));
             d.setAnio(rs.getInt("anio"));
             d.setNumberExpediente(rs.getString("numExpediente"));
             d.setResolucionAdmin(rs.getString("resolAdmin"));
@@ -179,6 +179,10 @@ public class DocumentoRespositorioImpl implements DocumentoRepositorio {
         };
     }
 
+    private String extraerNumero(String valor) {
+        if (valor == null) return null;
+        return valor.replaceAll("\\D", ""); // Elimina todo excepto dígitos
+    }
     private List<String> listarNombre(String tabla) {
         String sql = ("SELECT nombre FROM " + tabla).toString();
         return jdbcTemplate.queryForList(sql, String.class);
