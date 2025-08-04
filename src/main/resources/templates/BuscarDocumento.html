@@ -27,10 +27,7 @@
                     <!-- Acta -->
                     <div>
                         <label>Acta:</label>
-                        <select th:field="*{numActa}">
-                            <option value="">Seleccione acta</option>
-                            <option th:each="acta : ${actas}" th:value="${acta}" th:text="${acta}"></option>
-                        </select>
+                        <input type="number" th:field="*{numActa}" placeholder="Numero de acta" min="1">
                     </div>
                     <!-- Tipo -->
                     <div>

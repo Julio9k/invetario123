@@ -23,10 +23,7 @@
                     </div>
                     <div>
                         <label>Acta:</label>
-                        <select th:field="*{numActa}" required>
-                            <option value="">Seleccione acta</option>
-                            <option th:each="numActa : ${actas}" th:value="${numActa}" th:text="${numActa}"></option>
-                        </select>
+                         <input type="number" th:field="*{numActa}" placeholder="Ingrese año" required min="1">
                     </div>
                     <!-- Tipo de Documento -->
                     <div>
@@ -58,12 +55,12 @@
                     <!-- Año -->
                     <div>
                         <label>Año:</label>
-                        <input type="text" th:field="*{anio}" placeholder="Ingrese año" required min="1900" max="2999">
+                        <input type="number" th:field="*{anio}" placeholder="Ingrese año" required min="1900" max="2999">
                     </div>
                     <!-- Nº Expediente -->
                     <div>
                         <label>N° Expediente:</label>
-                        <input type="text" th:field="*{numberExpediente}" placeholder="Ingrese expediente" required>
+                        <input type="text" th:field="*{numberExpediente}" placeholder="Ingrese expediente">
                     </div>
                     <!-- Resolución Administrativa -->
                     <div>
@@ -74,19 +71,13 @@
                     <!-- Tomo -->
                     <div>
                         <label>Tomo:</label>
-                        <select th:field="*{tomo}" required>
-                            <option value="">Seleccione Tomo</option>
-                            <option th:each="tomo : ${tomos}" th:value="${tomo}" th:text="${tomo}"></option>
-                        </select>
+                        <input type="number" th:field="*{tomo}" placeholder="ejm. 1,2,3" required min="1" max="2999">
                     </div>
 
                     <!-- Caja -->
                     <div>
                         <label>Caja:</label>
-                        <select th:field="*{caja}" required>
-                            <option value="">Seleccione Caja</option>
-                            <option th:each="caja : ${cajas}" th:value="${caja}" th:text="${caja}"></option>
-                        </select>
+                        <input type="number" th:field="*{caja}" placeholder="ejm. 1,2,3" required min="1" max="2999">
                     </div>
                     <div>
                         <label>Estado:</label>

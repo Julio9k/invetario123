@@ -20,6 +20,19 @@ public class DocumentoRespositorioImpl implements DocumentoRepositorio {
 
     @Override
     public void registrar(Documento documento) throws Exception {
+    	
+    	  if (documento.getNumActa() != null && !documento.getNumActa().trim().isEmpty()) {
+    	        documento.setNumActa("ACTA " + documento.getNumActa().trim());
+    	    }
+    	  
+    	  if (documento.getTomo() != null && !documento.getTomo().trim().isEmpty()) {
+  	        documento.setTomo("TOMO " + documento.getTomo().trim());
+  	    }
+    	  
+    	  if (documento.getCaja() != null && !documento.getCaja().trim().isEmpty()) {
+  	        documento.setCaja("CAJA " + documento.getCaja().trim());
+  	    }
+    	  
         String sql = "SELECT sp_registrar_documento(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.queryForObject(sql, Object.class,
                 documento.getNombreDocumento(),
@@ -28,7 +41,7 @@ public class DocumentoRespositorioImpl implements DocumentoRepositorio {
                 documento.getDistrito(),
                 documento.getDireccion(),
                 documento.getTomo(),
-                documento.getCaja(),
+                documento.getTomo(),
                 documento.getEstado(),
                 documento.getFechaRegistro(),
                 documento.getAnio(),
@@ -74,8 +87,8 @@ public class DocumentoRespositorioImpl implements DocumentoRepositorio {
         }
 
         if (documentoFiltro.getNumActa() != null && !documentoFiltro.getNumActa().trim().isEmpty()) {
-            whereClause.append(" AND numActa = ?");
-            params.add(documentoFiltro.getNumActa().trim());
+            whereClause.append(" AND numActa LIKE ?");
+            params.add("%" + documentoFiltro.getNumActa().trim());
         }
 
         if (documentoFiltro.getAnio() != null) {
