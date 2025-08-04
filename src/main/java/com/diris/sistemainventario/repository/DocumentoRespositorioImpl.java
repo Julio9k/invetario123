@@ -41,7 +41,7 @@ public class DocumentoRespositorioImpl implements DocumentoRepositorio {
                 documento.getDistrito(),
                 documento.getDireccion(),
                 documento.getTomo(),
-                documento.getTomo(),
+                documento.getCaja(),
                 documento.getEstado(),
                 documento.getFechaRegistro(),
                 documento.getAnio(),
